@@ -1,0 +1,559 @@
+﻿<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ぴたっとナース - 決定版ピッチ資料</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/white.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        /* デザイン設定 */
+        :root {
+            --brand-color: #ff7f50; /* コーラルピンク */
+            --brand-sub: #ffb7b2;
+            --text-color: #333;
+            --accent-blue: #4a90e2; /* 信頼感の青 */
+        }
+        
+        body { font-family: 'Noto Sans JP', sans-serif !important; color: var(--text-color); }
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 { font-family: 'Noto Sans JP', sans-serif !important; }
+        
+        .text-brand { color: var(--brand-color) !important; }
+        .text-blue { color: var(--accent-blue) !important; }
+        .text-bold { font-weight: 900 !important; }
+        .bg-brand { background-color: var(--brand-color); color: white; }
+
+        /* 左上の固定ロゴ */
+        .fixed-logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 2px solid var(--brand-color);
+            border-radius: 50%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: var(--brand-color);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* レイアウト */
+        .split-container { display: flex; align-items: center; gap: 30px; justify-content: center; }
+        .split-col { flex: 1; }
+
+        /* 画像プレースホルダー */
+        .img-box {
+            background: #eee; border: 2px dashed #ccc; color: #888;
+            display: flex; align-items: center; justify-content: center;
+            margin: 20px auto; font-weight: bold;
+        }
+
+        /* 比較表 */
+        .comp-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            font-size: 0.7em !important; 
+            border-bottom: 1px solid #ccc; /* 【追加】テーブル全体の下線を強制 */
+        }
+        .comp-table th { background: #f0f0f0; padding: 15px; border: 1px solid #ccc; }
+        .comp-table td { padding: 15px; border: 1px solid #ccc; }
+		
+        .highlight-col { background: #fff0eb; border: 3px solid var(--brand-color) !important; font-weight: bold; }
+        .price-big { font-size: 1.5em; color: var(--brand-color); font-weight: bold; }
+
+        /* --- 追加: 着信画面デザイン --- */
+        .incoming-call-ui {
+            background: rgba(20, 20, 20, 0.95); /* スマホ画面の黒背景 */
+            color: white;
+            padding: 30px 20px;
+            border-radius: 40px;
+            width: 320px;
+            margin: 30px auto;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            border: 4px solid #333;
+            animation: vibrate 0.5s infinite linear; /* 着信バイブレーション */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+        }
+
+        .caller-icon {
+            width: 100px;
+            height: 100px;
+            background: #aaa;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            color: #555;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="%23ccc" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
+            background-size: cover;
+        }
+
+        .caller-name { font-size: 2rem; font-weight: normal; margin-bottom: 5px; }
+        .call-status { font-size: 0.9rem; color: #aaa; margin-bottom: 50px; }
+
+        .call-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .action-btn {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .btn-decline { background-color: #ff3b30; }
+        .btn-accept { background-color: #4cd964; }
+
+        @keyframes vibrate {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+		
+		/* --- 9ページ目レイアウト調整 --- */
+		/* 真ん中の矢印を必要最小限の幅にする */
+		.col-shrink { 
+			flex: 0 0 auto !important; 
+			width: auto !important; 
+			margin: 0 10px !important;
+		}
+		/* 左右のボックス内の会話レイアウト */
+		.chat-box {
+			padding: 25px !important;
+			border-radius: 15px;
+			height: 100%;
+		}
+		.chat-row {
+			display: flex;
+			align-items: flex-start; /* アイコンとテキストの上揃え */
+			text-align: left;
+			margin-bottom: 15px;
+			font-size: 24px !important; /* 文字サイズ調整 */
+			line-height: 1.4 !important;
+		}
+		.chat-icon {
+			flex: 0 0 50px; /* アイコン幅固定 */
+			font-size: 1.2em;
+		}
+		.chat-content {
+			flex: 1;
+		}
+		
+		/* --- 15ページ目 ロードマップ調整 --- */
+		.roadmap-box {
+			text-align: left;
+			display: flex;
+			flex-direction: column;
+			gap: 15px; /* 各ステップ間の隙間 */
+		}
+		.step-card {
+			background: white;
+			border-left: 5px solid #ddd; /* 左側の線 */
+			padding: 10px 15px;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+		}
+		.step-card.active {
+			border-left-color: var(--brand-color); /* Step3など強調したい部分の色 */
+			background: #fff9f5;
+		}
+		.step-title {
+			font-size: 24px;
+			font-weight: bold;
+			margin-bottom: 5px;
+			color: #555;
+		}
+		.step-desc {
+			font-size: 18px;
+			line-height: 1.4;
+		}
+		.step-sub {
+			font-size: 14px;
+			color: #888;
+			margin-top: 5px;
+			display: block;
+		}
+
+        /* --------------------------- */
+
+    </style>
+</head>
+<body>
+
+<div class="fixed-logo"><img src="img/logo.png" style="width: 70%; height: auto;"></div>
+
+<div class="reveal">
+    <div class="slides">
+
+        <section>
+            <h4>看護師が、あなたの「もう一人の家族」に</h4>
+            <h1 class="text-brand text-bold">ぴたっとナース</h1>
+            <img src="img/mainvisu.png" style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover; border: 2px solid #eee;" alt="メインビジュアル">
+            <p>代表：野村 由佳子（臨床経験12年 / 正看護師）</p>
+        </section>
+
+        <section>
+            <h2>命を守るプロフェッショナル</h2>
+            <div class="split-container">
+                <div class="split-col">
+                    <div style="height: 350px; display: flex; align-items: center; justify-content: center;">
+                        <img src="img/old.png" style="max-height: 100%; max-width: 100%; width: auto;" alt="看護師姿の写真">
+                    </div>
+                </div>
+                <div class="split-col" style="text-align: left;">
+                    <ul>
+                        <li>臨床経験 12年</li>
+                        <li>救急処置・医師連携</li>
+                        <li>患者様の心のケア</li>
+                    </ul>
+                    <br><br>
+                    <h4 class="fragment text-brand">しかし、私にも<br><span style="white-space: nowrap;">救えないものがありました。</span></h4>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>残酷な「120キロ」の壁</h2>
+            <div class="img-box" style="height: 250px;"><img src="img/map.png" height: auto;"></div>
+            <h3 class="text-brand">車で片道 2時間</h3>
+            <p>親には「すぐ行くよ」と言っている。<br>でも、仕事がある。家庭がある。</p>
+            <p class="fragment text-bold">気持ちとは裏腹に、かけつけられない</p>
+        </section>
+
+        <section data-background="#f5f5f5">
+            <h3>想像してください</h3>
+            <div class="img-box" style="height: 350px; background: #ddd;">
+                <img src="img/ushirosugata.png" style="max-height: 100%; max-width: 100%; width: auto;">
+            </div>
+            <p>医師の説明もよく分からず、ただ頷く親。<br>その横に、誰もいてあげられない現実。</p>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80">
+            <div style="background-color: rgba(0,0,0,0.6); position: absolute; top:0; left:0; width: 100%; height: 100%;"></div>
+            
+            <div style="position: relative; z-index: 2; padding-top: 5%;">
+                <h2 style="color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">平日 AM 10:00<br>重要な会議中</h2>
+                
+                <div class="fragment incoming-call-ui">
+                    <audio data-autoplay src="mp3/ringtone.mp3"></audio> <div class="caller-icon"></div>
+                    <div class="caller-name">母さん</div>
+                    <div class="call-status">スマートフォン音声通話...</div>
+                    
+                    <div class="call-actions">
+                        <div class="action-btn btn-decline">
+                            <span class="material-icons">call_end</span>
+                        </div>
+                        <div class="action-btn btn-accept">
+                            <span class="material-icons">call</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <aside class="notes">
+                平日の午前10時。大事な会議中です。ふと、実家から着信が入る。
+                （着信音を鳴らす）
+                「何かあったのか？」と心臓が止まりそうになる。
+                けれど、電話には出られない。「ごめんね」と心の中で謝りながら、スマホを裏返して、置く。
+            </aside>
+        </section>
+
+        <section data-background-color="#000">
+            <h2 style="color: white; font-size: 3em;">静かな絶望</h2>
+            <br>
+            <h2 class="fragment" style="color: #ccc;">罪悪感</h2>
+
+            <aside class="notes">
+                これは、現役世代の私たちが抱える「静かな絶望」です。
+                私たちは皆、心に「罪悪感」を抱えています。
+                「心配だ。でも仕事は休めない」
+                その板挟みの中で、多くの人が見ないふりをして、日々をやり過ごしています。
+            </aside>
+        </section>
+
+        <section>
+            <h3>物理的な距離は変えられない。<br>でも、「心の距離」は変えられる。</h3>
+            <div class="fragment" style="margin-top: 50px; border: 5px solid var(--brand-color); padding: 30px; border-radius: 20px;">
+                <h2 class="text-brand text-bold">看護師免許を持った<br>「もう一人の家族」</h2>
+            </div>
+        </section>
+
+        <section>
+            <h2>解決すべき「3つの壁」</h2>
+            <div style="display: flex; gap: 10px; margin-top: 30px;">
+                <div style="flex: 1; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <div style="font-size: 3em;">🕒</div>
+                    <h4>時間の壁</h4>
+                    <small>仕事・育児・介護<br>トリプルケアの悲鳴</small>
+                </div>
+                <div style="flex: 1; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <div style="font-size: 3em;">⛄</div>
+                    <h4>距離の壁</h4>
+                    <small>冬の峠越えは<br>命がけ</small>
+                </div>
+                <div class="fragment" style="flex: 1; padding: 20px; background: #fff0eb; border: 2px solid var(--brand-color); border-radius: 10px;">
+                    <div style="font-size: 3em;">🏥</div>
+                    <h4 class="text-brand">医療知識の壁</h4>
+                    <small class="text-bold">診察室は<br>ブラックボックス</small>
+                </div>
+            </div>
+
+            <aside class="notes">
+                なぜ、家族の愛だけでは解決できないのか。そこには「3つの壁」があります。
+                特に深刻なのが「医療知識の壁」です。
+                診察室で何が起きたのか？ 専門用語が飛び交う中、親御さんは分かったふりをしてしまう。
+                結果、テーブルには飲まれていない薬が山積みになるのです。
+            </aside>
+        </section>
+
+		<section>
+            <h3>サービスの核「医療通訳」</h3>
+            <div class="split-container" style="align-items: stretch;">
+                
+                <div class="split-col chat-box" style="background: #f0f0f0;">
+                    <h5 style="color: #666; margin-bottom: 30px;">これまでの診察</h5>
+                    
+                    <div class="chat-row">
+                        <div class="chat-icon">👨‍⚕️</div>
+                        <div class="chat-content">
+                            <strong>医師：</strong><br>
+                            「血圧170。薬増やします」
+                        </div>
+                    </div>
+                    
+                    <div class="chat-row">
+                        <div class="chat-icon">👵</div>
+                        <div class="chat-content">
+                            <strong>親：</strong><br>
+                            「……（ニシン漬けがやめられない）」
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split-col col-shrink fragment">
+                    <h2 class="text-brand" style="margin: 0;">➡</h2>
+                    <h4 class="text-brand text-bold">介入</h4>
+                </div>
+
+                <div class="split-col fragment chat-box" style="background: #fff0eb; border: 3px solid var(--brand-color);">
+                    <h5 class="text-brand text-bold" style="margin-bottom: 30px;">ぴたっとナース</h5>
+                    
+                    <div class="chat-row">
+                        <div class="chat-icon">👩‍⚕️</div>
+                        <div class="chat-content">
+                            <strong>私：</strong>「先生、実は原因は<br>
+                            <span class="text-brand text-bold" style="font-size: 1.1em;">『ニシン漬け』</span>です！」
+                        </div>
+                    </div>
+                    
+                    <hr style="border-color: var(--brand-sub); margin: 15px 0;">
+                    
+                    <div style="text-align: left; font-size: 24px;">
+                        <strong>結果：</strong><br>
+                        薬は増やさず、1日1切れに制限
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3>ブラックボックスを開ける</h3>
+            <div class="split-container">
+                <div class="split-col">
+                    <div class="img-box" style="height: 350px; background: white; border: 1px solid #ddd;">
+                        <img src="img/smartphone.png" style="max-height: 100%; max-width: 100%; width: auto;" alt="看護師姿の写真">
+						<br>LINE画面イメージ<br>
+                        「血圧上昇の原因は<br>ニシン漬けでした」
+                    </div>
+                </div>
+                <div class="split-col">
+                    <h4 class="text-blue">ご家族の安心</h4>
+                    <p>「そうか、漬物のせいか。<br>電話で言ってみよう」</p>
+                    <br>
+                    <h3 class="fragment text-brand">親子の会話が、<br>再びつながる。</h3>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3>スタンダードプラン</h3>
+            <h1 class="text-brand text-bold">月額 25,000円</h1>
+            <p>（月2回の通院同行・レポート込み）</p>
+            <br>
+            <h3 class="fragment">高いと思いますか？</h3>
+        </section>
+
+		<section>
+            <h3>あなたが「月2回」仕事を休んだら？</h3>
+            <div class="split-container" style="align-items: stretch; margin-top: 30px;">
+                
+                <div class="split-col" style="text-align: left; padding: 20px; color: #666;">
+                    <h4 style="color: #888; margin-bottom: 20px;">自分で帰省</h4>
+                    <ul style="font-size: 24px; line-height: 1.8;">
+                        <li>往復の交通費</li>
+                        <li>有給休暇の消化</li>
+                        <li>体力的な疲労</li>
+                        <li>会社での評価ダウン</li>
+                    </ul>
+                    <hr style="margin: 20px 0; border-color: #ccc;">
+                    <h4 style="margin-top: 10px;">数万円以上の損失</h4>
+                </div>
+
+                <div class="split-col col-shrink">
+                    <h1 style="color: #ddd; font-size: 80px; margin: 0; line-height: 1;">VS</h1>
+                </div>
+
+                <div class="split-col fragment" style="background: #fff0eb; padding: 30px; border-radius: 15px; border: 3px solid var(--brand-color); display: flex; flex-direction: column; justify-content: center;">
+                    <h3 class="text-brand">ぴたっとナース</h3>
+                    <h2 class="text-brand" style="font-size: 60px; margin: 15px 0;">2.5万円</h2>
+                    <div style="font-size: 24px; font-weight: bold; line-height: 1.6;">
+                        <p style="margin: 0;">仕事は休まなくていい。</p>
+                        <p style="margin: 0;">プロが見守る安心。</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h3>「隙間」ではなく「勝てる」市場</h3>
+            <table class="comp-table">
+                <thead>
+                    <tr>
+                        <th width="30%"></th>
+                        <th width="35%">大手家事代行・警備</th>
+                        <th width="35%" class="highlight-col text-brand">ぴたっとナース</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>料金相場</td>
+                        <td>時間制<br><strong>3.5万円〜 /月</strong><br><small>(交通費別・入会金あり)</small></td>
+                        <td class="highlight-col"><span class="price-big">2.5万円</span> /月<br><small>(定額・入会金なし)</small></td>
+                    </tr>
+                    <tr>
+                        <td>対応者</td>
+                        <td>ヘルパー・一般<br><small>(医療知識なし)</small></td>
+                        <td class="highlight-col text-bold">正看護師<br><small>(医療のプロ)</small></td>
+                    </tr>
+                    <tr>
+                        <td>柔軟性</td>
+                        <td>マニュアル通り<br><small>(寄り道不可)</small></td>
+                        <td class="highlight-col text-bold">完全オーダーメイド<br><small>(わがままOK)</small></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="fragment" style="margin-top: 20px;"><strong>高品質なのに、価格競争力がある。</strong></p>
+        </section>
+
+        <section>
+            <h3>ビジネスとしての堅実性</h3>
+            <p>大規模な設備投資はゼロ。</p>
+            <div style="background: var(--brand-color); color: white; padding: 20px; border-radius: 10px; width: 80%; margin: 30px auto;">
+                <h2>月間 <span style="font-size: 1.5em; color: yellow;">8名</span> で黒字化</h2>
+            </div>
+            <p><span style="white-space: nowrap;">私の生活費と経費は、わずか8名の契約で賄えます。</span><br>これは絶対に潰れないラインです。</p>
+        </section>
+
+		<section>
+            <h3>5カ年 成長ロードマップ</h3>
+            <div class="split-container" style="align-items: flex-start; margin-top: 30px;">
+                
+                <div class="split-col roadmap-box">
+                    
+                    <div class="step-card">
+                        <div class="step-title">Step 1：基盤構築 (1-2年目)</div>
+                        <div class="step-desc">
+                            私一人で確実に15名まで増やす。
+                            <span class="step-sub">→ 病院連携・口コミで達成可能</span>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-title">Step 2：組織化 (3年目〜)</div>
+                        <div class="step-desc">
+                            <span class="text-brand text-bold">看護師増員</span>。家族の手も借り事務効率化。
+                            <span class="step-sub">→ 潜在看護師の採用</span>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card active">
+                        <div class="step-title text-brand">Step 3：拡大 (5年目)</div>
+                        <div class="step-desc">
+                            売上 <span class="text-bold" style="font-size: 1.2em;">1,300万円</span> 突破。
+                            <span class="step-sub">→ 旭川モデルを確立し、全道へ</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="split-col">
+                    <div class="img-box" style="height: 400px; background: white; border: 1px solid #eee;">
+                        <div style="color: #ccc; font-weight: bold;">
+                            <img src="img/upgraph.png" style="max-height: 100%; max-width: 100%; width: auto;" alt="看護師姿の写真">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h3>「後悔のない別れ」を増やす</h3>
+            <p>「もっと話を聞いてあげればよかった」<br>そんな涙を、一つでも減らしたい。</p>
+            <br>
+            <h4 class="fragment text-brand">親孝行の新しいスタンダードを、<br>ここ旭川から。</h4>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?auto=format&fit=crop&w=1600&q=80">
+            <div style="background: rgba(255,255,255,0.85); padding: 40px; border-radius: 20px;">
+                <h3 class="text-brand">あなたの「もう一人の家族」になります。</h3>
+                <h1 class="text-brand text-bold">ぴたっとナース</h1>
+                <div class="img-box" style="width: 150px; height: 150px; border-radius: 50%; margin: 20px auto; border: 3px solid var(--brand-color);">
+                    <img src="img/mainvisu.png" style="width: 250px; height: 250px; border-radius: 50%; object-fit: cover; border: 2px solid #eee;" alt="メインビジュアル">
+                </div>
+                <p style="color: #333;">ご清聴ありがとうございました</p>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script>
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+        transition: 'slide'
+    });
+</script>
+
+</body>
+</html>
