@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ja">
 <head>
     <meta charset="utf-8">
@@ -199,8 +199,28 @@
 			display: block;
 		}
 
-        /* --------------------------- */
+        /* --- 印刷用設定（PDF化） --- */
+        @media print {
+            /* 印刷時に断片（fragment）をすべて表示させる */
+            .fragment {
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: none !important;
+            }
+            
+            /* 固定ロゴはreveal.jsのPDFモードでは各スライドに配置されるが、
+               万が一の崩れ防止のために調整 */
+            .fixed-logo {
+                position: absolute; /* fixedだと全ページ重なることがあるためabsoluteへ */
+                z-index: 9999;
+            }
 
+            /* 背景色強制 */
+            section {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
     </style>
 </head>
 <body>
@@ -551,7 +571,11 @@
         progress: true,
         center: true,
         hash: true,
-        transition: 'slide'
+        transition: 'slide',
+        // 【追加】PDF化の設定
+        // アニメーションの途中経過（fragment）を別ページに分割せず、1スライド1枚にまとめる設定
+        // 事務局提出用PDFなら false 推奨、アニメーションの流れも見せたいなら true に変更してください
+        pdfSeparateFragments: false 
     });
 </script>
 
