@@ -1,9 +1,9 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ja">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ぴたっとナース - ピッチ資料</title>
+    <title>ぴたっとナース - 決定版ピッチ資料</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
@@ -67,17 +67,17 @@
             width: 100%; 
             border-collapse: collapse; 
             font-size: 0.7em !important; 
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #ccc; /* 【追加】テーブル全体の下線を強制 */
         }
         .comp-table th { background: #f0f0f0; padding: 15px; border: 1px solid #ccc; }
         .comp-table td { padding: 15px; border: 1px solid #ccc; }
-        
+		
         .highlight-col { background: #fff0eb; border: 3px solid var(--brand-color) !important; font-weight: bold; }
         .price-big { font-size: 1.5em; color: var(--brand-color); font-weight: bold; }
 
-        /* 着信画面デザイン */
+        /* --- 追加: 着信画面デザイン --- */
         .incoming-call-ui {
-            background: rgba(20, 20, 20, 0.95);
+            background: rgba(20, 20, 20, 0.95); /* スマホ画面の黒背景 */
             color: white;
             padding: 30px 20px;
             border-radius: 40px;
@@ -86,7 +86,7 @@
             text-align: center;
             box-shadow: 0 30px 60px rgba(0,0,0,0.6);
             border: 4px solid #333;
-            animation: vibrate 0.5s infinite linear;
+            animation: vibrate 0.5s infinite linear; /* 着信バイブレーション */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
         }
 
@@ -135,41 +135,72 @@
             80% { transform: translate(2px, -2px); }
             100% { transform: translate(0); }
         }
-        
-        /* 9ページ目レイアウト調整 */
-        .col-shrink { flex: 0 0 auto !important; width: auto !important; margin: 0 10px !important; }
-        .chat-box { padding: 25px !important; border-radius: 15px; height: 100%; }
-        .chat-row { display: flex; align-items: flex-start; text-align: left; margin-bottom: 15px; font-size: 24px !important; line-height: 1.4 !important; }
-        .chat-icon { flex: 0 0 50px; font-size: 1.2em; }
-        .chat-content { flex: 1; }
-        
-        /* 15ページ目 ロードマップ調整 */
-        .roadmap-box { text-align: left; display: flex; flex-direction: column; gap: 15px; }
-        .step-card { background: white; border-left: 5px solid #ddd; padding: 10px 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .step-card.active { border-left-color: var(--brand-color); background: #fff9f5; }
-        .step-title { font-size: 24px; font-weight: bold; margin-bottom: 5px; color: #555; }
-        .step-desc { font-size: 18px; line-height: 1.4; }
-        .step-sub { font-size: 14px; color: #888; margin-top: 5px; display: block; }
+		
+		/* --- 9ページ目レイアウト調整 --- */
+		/* 真ん中の矢印を必要最小限の幅にする */
+		.col-shrink { 
+			flex: 0 0 auto !important; 
+			width: auto !important; 
+			margin: 0 10px !important;
+		}
+		/* 左右のボックス内の会話レイアウト */
+		.chat-box {
+			padding: 25px !important;
+			border-radius: 15px;
+			height: 100%;
+		}
+		.chat-row {
+			display: flex;
+			align-items: flex-start; /* アイコンとテキストの上揃え */
+			text-align: left;
+			margin-bottom: 15px;
+			font-size: 24px !important; /* 文字サイズ調整 */
+			line-height: 1.4 !important;
+		}
+		.chat-icon {
+			flex: 0 0 50px; /* アイコン幅固定 */
+			font-size: 1.2em;
+		}
+		.chat-content {
+			flex: 1;
+		}
+		
+		/* --- 15ページ目 ロードマップ調整 --- */
+		.roadmap-box {
+			text-align: left;
+			display: flex;
+			flex-direction: column;
+			gap: 15px; /* 各ステップ間の隙間 */
+		}
+		.step-card {
+			background: white;
+			border-left: 5px solid #ddd; /* 左側の線 */
+			padding: 10px 15px;
+			box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+		}
+		.step-card.active {
+			border-left-color: var(--brand-color); /* Step3など強調したい部分の色 */
+			background: #fff9f5;
+		}
+		.step-title {
+			font-size: 24px;
+			font-weight: bold;
+			margin-bottom: 5px;
+			color: #555;
+		}
+		.step-desc {
+			font-size: 18px;
+			line-height: 1.4;
+		}
+		.step-sub {
+			font-size: 14px;
+			color: #888;
+			margin-top: 5px;
+			display: block;
+		}
 
-        /* 新デザイン用カード（心の潤い） */
-        .card-box {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            border-bottom: 5px solid var(--brand-color);
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        /* --------------------------- */
 
-        /* 印刷用 */
-        @media print {
-            .fragment { opacity: 1 !important; visibility: visible !important; transform: none !important; }
-            .fixed-logo { position: absolute; z-index: 9999; }
-            section { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-        }
     </style>
 </head>
 <body>
@@ -214,13 +245,20 @@
             <p class="fragment text-bold">気持ちとは裏腹に、かけつけられない</p>
         </section>
 
-        <section data-background="#f5f5f5">
-            <h3>想像してください</h3>
-            <div class="img-box" style="height: 350px; background: #ddd;">
-                <img src="img/ushirosugata.png" style="max-height: 100%; max-width: 100%; width: auto;">
-            </div>
-            <p>医師の説明もよく分からず、ただ頷く親。<br>その横に、誰もいてあげられない現実。</p>
-        </section>
+		<section data-background="#f5f5f5" style="padding: 20px 0;">
+			<h3 style="margin-bottom: 20px; font-size: 1.8em;">想像してください</h3>
+			
+			<div style="width: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
+				<img src="img/ushirosugata.png" 
+					 style="max-width: 80%; max-height: 50vh; width: auto; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);" 
+					 alt="高齢者の後ろ姿">
+			</div>
+
+			<div style="line-height: 1.6;">
+				<p style="margin: 0; font-weight: bold; font-size: 1.1em;">医師の説明もよく分からず、ただ頷く親。</p>
+				<p style="margin: 0; font-weight: bold; font-size: 1.1em;">その横に、誰もいてあげられない現実。</p>
+			</div>
+		</section>
 
         <section data-background-image="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80">
             <div style="background-color: rgba(0,0,0,0.6); position: absolute; top:0; left:0; width: 100%; height: 100%;"></div>
@@ -300,7 +338,7 @@
             </aside>
         </section>
 
-        <section>
+		<section>
             <h3>サービスの核「医療通訳」</h3>
             <div class="split-container" style="align-items: stretch;">
                 
@@ -311,7 +349,7 @@
                         <div class="chat-icon">👨‍⚕️</div>
                         <div class="chat-content">
                             <strong>医師：</strong><br>
-                            「血圧170。薬増やします」
+                            「血圧170。高いね。<br>　薬増やします」
                         </div>
                     </div>
                     
@@ -319,7 +357,7 @@
                         <div class="chat-icon">👵</div>
                         <div class="chat-content">
                             <strong>親：</strong><br>
-                            「……（ニシン漬けがやめられない）」
+                            「何が原因かわからない...」
                         </div>
                     </div>
                 </div>
@@ -333,7 +371,7 @@
                     <h5 class="text-brand text-bold" style="margin-bottom: 30px;">ぴたっとナース</h5>
                     
                     <div class="chat-row">
-                        <div class="chat-icon">👩‍⚕️</div>
+                        <div class="chat-icon">👩🏻‍⚕️</div>
                         <div class="chat-content">
                             <strong>私：</strong>「先生、実は原因は<br>
                             <span class="text-brand text-bold" style="font-size: 1.1em;">『ニシン漬け』</span>です！」
@@ -349,27 +387,67 @@
                 </div>
             </div>
         </section>
+		
+				<section>
+			<h3>看護師による「医療通訳」プロセス</h3>
+			<div class="split-container" style="align-items: stretch; gap: 20px;">
+				
+				<div class="split-col chat-box" style="background: #f8f9fa; border-top: 5px solid #ccc;">
+					<div style="font-size: 0.8em; color: var(--brand-color); font-weight: bold;">Step 1：診察前</div>
+					<h5 style="margin: 10px 0;">情報の整理</h5>
+					<div style="font-size: 20px; text-align: left;">
+						<p>・生活状況のアセスメント</p>
+						<p>・曖昧な症状を言語化</p>
+						<p>・医師への伝達事項を要約</p>
+					</div>
+				</div>
+
+				<div class="split-col chat-box" style="background: #fff0eb; border: 3px solid var(--brand-color); position: relative;">
+					<div style="font-size: 0.8em; color: var(--brand-color); font-weight: bold;">Step 2：診察中</div>
+					<h5 style="margin: 10px 0;">「医療通訳」介入</h5>
+					<div style="font-size: 20px; text-align: left;">
+						<p>・専門用語を平易に翻訳</p>
+						<p>・本音（ニシン漬け等）を代弁</p>
+						<p>・最適な治療プランを打診</p>
+					</div>
+					<div style="position: absolute; top: -15px; right: -10px; background: var(--brand-color); color: white; padding: 2px 10px; border-radius: 5px; font-size: 0.6em;">核となる価値</div>
+				</div>
+
+				<div class="split-col chat-box" style="background: #f8f9fa; border-top: 5px solid #ccc;">
+					<div style="font-size: 0.8em; color: var(--brand-color); font-weight: bold;">Step 3：診察後</div>
+					<h5 style="margin: 10px 0;">家族へ報告</h5>
+					<div style="font-size: 20px; text-align: left;">
+						<p>・LINEで詳細レポート</p>
+						<p>・薬のセット・服用指導</p>
+						<p>・次回の受診方針を共有</p>
+					</div>
+				</div>
+
+			</div>
+			<p class="fragment" style="margin-top: 20px; font-weight: bold; color: var(--brand-color);">
+				単なる「付き添い」ではない<br>医学的根拠に基づいた介入
+			</p>
+		</section>
 
         <section>
             <h3>ブラックボックスを開ける</h3>
             <div class="split-container">
                 <div class="split-col">
                     <div class="img-box" style="height: 350px; background: white; border: 1px solid #ddd;">
-                        <img src="img/smartphone.png" style="max-height: 100%; max-width: 100%; width: auto;" alt="LINE画面">
-                        <br>LINE画面イメージ<br>
-                        「血圧上昇の原因は<br>ニシン漬けでした」
+                        <img src="img/smartphone.png" style="max-height: 100%; max-width: 100%; width: auto;" alt="看護師姿の写真">
+						<br>LINE画面イメージ
                     </div>
                 </div>
                 <div class="split-col">
                     <h4 class="text-blue">ご家族の安心</h4>
-                    <p>「そうか、漬物のせいか。<br>電話で言ってみよう」</p>
+                    <p><span style="white-space: nowrap;">「そうか、漬物か。</span><br>電話で話そう」</p>
                     <br>
                     <h3 class="fragment text-brand">親子の会話が、<br>再びつながる。</h3>
                 </div>
             </div>
         </section>
-        
-        <section>
+		
+		<section>
             <h3>「心の潤い」も、守りたい</h3>
             <p style="font-size: 0.6em; margin-bottom: 40px; color: #666;">制度の壁で諦めていた「小さな願い」を叶えます</p>
             
@@ -404,7 +482,7 @@
             <h3 class="fragment">高いと思いますか？</h3>
         </section>
 
-        <section>
+		<section>
             <h3>あなたが「月2回」仕事を休んだら？</h3>
             <div class="split-container" style="align-items: stretch; margin-top: 30px;">
                 
@@ -475,8 +553,8 @@
             </div>
             <p><span style="white-space: nowrap;">私の生活費と経費は、わずか8名の契約で賄えます。</span><br>これは絶対に潰れないラインです。</p>
         </section>
-        
-        <section>
+
+		<section>
             <h3>地域全体で支える「共生」モデル</h3>
             
             <div style="position: relative; height: 400px; display: flex; align-items: center; justify-content: center; margin-top: 20px;">
@@ -508,9 +586,9 @@
                 </div>
             </div>
         </section>
-        
-
-        <section>
+		
+		
+		<section>
             <h3>5カ年 成長ロードマップ</h3>
             <div class="split-container" style="align-items: flex-start; margin-top: 30px;">
                 
@@ -545,7 +623,7 @@
                 <div class="split-col">
                     <div class="img-box" style="height: 400px; background: white; border: 1px solid #eee;">
                         <div style="color: #ccc; font-weight: bold;">
-                            <img src="img/upgraph.png" style="max-height: 100%; max-width: 100%; width: auto;" alt="グラフ">
+                            <img src="img/upgraph.png" style="max-height: 100%; max-width: 100%; width: auto;" alt="看護師姿の写真">
                         </div>
                     </div>
                 </div>
@@ -581,8 +659,7 @@
         progress: true,
         center: true,
         hash: true,
-        transition: 'slide',
-        pdfSeparateFragments: false 
+        transition: 'slide'
     });
 </script>
 
