@@ -201,14 +201,19 @@
 		
 		/* ▼▼▼ ここを追加：スライド番号を強制的に表示・着色 ▼▼▼ */
         .reveal .slide-number {
-            display: block !important;    /* 強制表示 */
-            color: #ff7f50 !important;    /* ブランドカラー（または #333）で表示 */
-            font-weight: bold !important; /* 太字に */
-            font-size: 20px !important;   /* 少し大きく */
-            right: 20px !important;       /* 右端からの位置 */
-            bottom: 20px !important;      /* 下端からの位置 */
-            z-index: 2000 !important;     /* 他の要素より手前に */
-            background-color: transparent !important; /* 背景は透明に */
+            display: block !important;
+            color: #ff7f50 !important;    /* ブランドカラー */
+            font-weight: bold !important;
+            font-size: 20px !important;
+            
+            /* 中央寄せの魔法の記述 */
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            right: auto !important;       /* 右寄せ設定をリセット */
+            
+            bottom: 20px !important;      /* 下からの位置 */
+            z-index: 2000 !important;
+            background-color: transparent !important;
         }
 		
 		/* 印刷（PDF）時はスライド番号を隠す */
@@ -864,4 +869,5 @@
 </script>
 
 </body>
+
 </html>
