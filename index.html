@@ -198,6 +198,26 @@
 			margin-top: 5px;
 			display: block;
 		}
+		
+		/* ▼▼▼ ここを追加：スライド番号を強制的に表示・着色 ▼▼▼ */
+        .reveal .slide-number {
+            display: block !important;    /* 強制表示 */
+            color: #ff7f50 !important;    /* ブランドカラー（または #333）で表示 */
+            font-weight: bold !important; /* 太字に */
+            font-size: 20px !important;   /* 少し大きく */
+            right: 20px !important;       /* 右端からの位置 */
+            bottom: 20px !important;      /* 下端からの位置 */
+            z-index: 2000 !important;     /* 他の要素より手前に */
+            background-color: transparent !important; /* 背景は透明に */
+        }
+		
+		/* 印刷（PDF）時はスライド番号を隠す */
+        @media print {
+            .reveal .slide-number {
+                display: none !important;
+            }
+        }
+		
 
         /* --------------------------- */
 
@@ -686,7 +706,7 @@
 
                         <div style="width: 140px; display: flex; flex-direction: column; align-items: center; position: relative;">
                              <div class="fragment" data-fragment-index="1" style="position: absolute; top: 30px; background: #fff0eb; border: 2px solid var(--brand-color); padding: 5px 12px; border-radius: 8px; font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); white-space: nowrap; z-index: 10;">
-                                <span style="font-weight: bold; color: var(--brand-color);">車両購入</span>
+                             
                             </div>
                             <span class="text-brand text-bold" style="font-size: 26px; margin-bottom: 8px;">1,000万</span>
                             <div class="bg-brand" style="width: 90px; height: 307px; border-radius: 5px 5px 0 0;"></div>
@@ -836,7 +856,10 @@
         progress: true,
         center: true,
         hash: true,
-        transition: 'slide'
+        transition: 'slide',
+        
+        // ▼ ここを追加：スライド番号を表示（ c/t = 現在 / 合計 ）
+        slideNumber: 'c/t', 
     });
 </script>
 
